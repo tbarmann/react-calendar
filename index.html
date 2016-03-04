@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello React!</title>
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+  </head>
+  <body>
+    <div id="main"></div>
+   <script type="text/babel">
+
+      var App = React.createClass({
+        render: function(){
+          return (
+            <Cell/>
+            )
+        }
+
+      });
+
+      var Cell = React.createClass({
+        render: function(){
+          return (
+            <table className="cell-table">
+              <tbody>
+                <tr><td><CellDate day="12"/></td></tr>
+                <tr><td><CellEvent time="7p" title="Prov JS Meet Up" /></td></tr>
+              </tbody>
+            </table>
+            )
+        }
+
+      });
+
+     var CellDate = React.createClass({
+        render: function(){
+          return (
+            <span className="cell-date">{this.props.day}</span>
+            )
+        }
+
+      });
+
+    var CellEvent = React.createClass({
+        render: function(){
+          return (
+            <div className="cell-event-item">
+              <span className="cell-event-time">{this.props.time}</span>&nbsp;
+              <span className="cell-event-title">{this.props.title}</span>
+            </div>
+            )
+        }
+
+      });
+
+
+
+  //    var app = React.createElement(App);
+      ReactDOM.render(<App/>,document.getElementById('main'))
+   </script>
+
+
+  </body>
+</html>
