@@ -23,6 +23,30 @@ var helpers = {
 		}
 		// If Apr, Jun, Sep or Nov return 30; otherwise 31
 		return (m == 3 || m == 5 || m == 8 || m == 10) ? 30 : 31;
+	},
+	getCalendarMonthArray(month,year) {
+		var weeks = [];
+  		var d = new Date(year,month,1);
+  		var begin_cell=d.getDay();
+  		var end_day = helpers.getDaysInMonth(d);
+  		var curr_day=1;
+  		var cell_ptr=0;
+
+  		while (curr_day<=end_day) {
+  			days = [];
+  			for (var j=0;j<7;j++) {
+  				if ((cell_ptr<begin_cell)||(curr_day>end_day)) {
+  					days.push("");
+  				}
+  				else {
+  					days.push(curr_day);
+  					curr_day++;
+  				}
+  				cell_ptr++;
+  			}
+  			weeks.push(days);
+  		}
+  		return (weeks);
 	}
 
 };

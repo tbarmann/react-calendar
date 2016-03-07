@@ -85,10 +85,37 @@
 
       });
 
+    var CalendarMonth = React.createClass({
+      render() {
+        var weeks = helpers.getCalendarMonthArray(2,2016);
+        return (
+          <table>
+            <tbody>
+              <tr><td>S</td><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td></tr>
+              {weeks.map(function(week, i) {
+                return (
+                  <tr key={i}>
+                    {week.map(function(day, j) {
+                      return (
+                        <td key={j}>
+                          {day === "" ? "" : day}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}  
+            </tbody>
+          </table>
+          );
+
+      }
+
+    })
 
 
   //    var app = React.createElement(App);
-      ReactDOM.render(<App/>,document.getElementById('main'))
+      ReactDOM.render(<CalendarMonth/>,document.getElementById('main'))
    </script>
 
 
