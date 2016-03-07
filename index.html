@@ -6,6 +6,9 @@
     <script src="build/react.js"></script>
     <script src="build/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+
+    <script type="text/javascript" src="./js/helpers.js"></script>
 
   </head>
   <body>
@@ -13,21 +16,47 @@
    <script type="text/babel">
 
       var App = React.createClass({
-        render: function(){
+        getInitialState() {
+          return {events:[]};
+        },
+        componentDidMount () {
+          this.loadEvents();
+        },
+
+        loadEvents(){
+            $.getJSON('./data/events.js',function(data){
+               this.setState({events:data});
+            }.bind(this))
+        },
+
+        render(){
           return (
-            <Cell/>
-            )
+            <div>
+              {this.state.events.map(function(event,i){
+                return <Cell key={i} event={event}/>
+              })}
+            </div>
+          )
         }
 
       });
 
       var Cell = React.createClass({
-        render: function(){
+        propTypes : {
+          event: React.PropTypes.shape({
+            d: React.PropTypes.number.isRequired,
+            t: React.PropTypes.string.isRequired,
+            title: React.PropTypes.string.isRequired
+          }).isRequired
+        },
+
+        render(){
+          var event = this.props.event;
           return (
             <table className="cell-table">
               <tbody>
-                <tr><td><CellDate day="12"/></td></tr>
-                <tr><td><CellEvent time="7p" title="Prov JS Meet Up" /></td></tr>
+                <tr><td><CellDate day={event.d}/></td></tr>
+                <tr><td><CellEvent time={event.t} title={event.title} /></td></tr>
               </tbody>
             </table>
             )
@@ -36,7 +65,7 @@
       });
 
      var CellDate = React.createClass({
-        render: function(){
+        render(){
           return (
             <span className="cell-date">{this.props.day}</span>
             )
@@ -45,7 +74,7 @@
       });
 
     var CellEvent = React.createClass({
-        render: function(){
+        render(){
           return (
             <div className="cell-event-item">
               <span className="cell-event-time">{this.props.time}</span>&nbsp;
