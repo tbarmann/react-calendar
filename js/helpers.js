@@ -1,21 +1,20 @@
 var helpers = {
-	  // Returns true if year is a leap year; otherwise false
-  isLeapYear(utc){
+	// Returns true if year is a leap year; otherwise false
+  isLeapYear : function(utc) {
       var y = utc ? utc.getUTCFullYear() : utc.getFullYear();
       return !(y % 4) && (y % 100) || !(y % 400) ? true : false;
   },
 
   //----------------------------------------------------------------------
   // Return the name of the month
-  getNameOfMonth(utc) {
+  getNameOfMonth : function(m) {
       var nameOfMonths = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-      var m = utc ? utc.getUTCMonth() : utc.getMonth();
       return nameOfMonths[m];
   },
 
   //----------------------------------------------------------------------
   // Return the number of days in the month
-	getDaysInMonth (utc) {
+	getDaysInMonth : function(utc) {
 		var m = utc ? utc.getUTCMonth() : utc.getMonth();
 		// If feb.
 		if (m == 1) {
@@ -24,7 +23,7 @@ var helpers = {
 		// If Apr, Jun, Sep or Nov return 30; otherwise 31
 		return (m == 3 || m == 5 || m == 8 || m == 10) ? 30 : 31;
 	},
-	getCalendarMonthArray(month,year) {
+	getCalendarMonthArray : function(month,year) {
 		var weeks = [];
   		var d = new Date(year,month,1);
   		var begin_cell=d.getDay();
@@ -36,7 +35,7 @@ var helpers = {
   			days = [];
   			for (var j=0;j<7;j++) {
   				if ((cell_ptr<begin_cell)||(curr_day>end_day)) {
-  					days.push("");
+  					days.push(null);
   				}
   				else {
   					days.push(curr_day);

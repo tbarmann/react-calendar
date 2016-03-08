@@ -87,26 +87,33 @@
 
     var CalendarMonth = React.createClass({
       render() {
-        var weeks = helpers.getCalendarMonthArray(2,2016);
+        var m = parseInt(this.props.month);
+        var y = parseInt(this.props.year);
+        var weeks = helpers.getCalendarMonthArray(m,y);
+        var monthName = helpers.getNameOfMonth(m);
         return (
-          <table>
-            <tbody>
-              <tr><td>S</td><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td></tr>
-              {weeks.map(function(week, i) {
-                return (
-                  <tr key={i}>
-                    {week.map(function(day, j) {
-                      return (
-                        <td key={j}>
-                          {day === "" ? "" : day}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}  
-            </tbody>
-          </table>
+          <div>
+            <span className="month-name">{monthName}</span>&nbsp;
+            <span className="year">{y}</span>
+            <table>
+              <tbody>
+                <tr><td>S</td><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td></tr>
+                {weeks.map(function(week, i) {
+                  return (
+                    <tr key={i}>
+                      {week.map(function(day, j) {
+                        return (
+                          <td key={j}>
+                            {day === null ? "" : day}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}  
+              </tbody>
+            </table>
+          </div>
           );
 
       }
@@ -115,7 +122,7 @@
 
 
   //    var app = React.createElement(App);
-      ReactDOM.render(<CalendarMonth/>,document.getElementById('main'))
+      ReactDOM.render(<CalendarMonth month="2" year="2016"/>,document.getElementById('main'))
    </script>
 
 
