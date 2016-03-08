@@ -1,0 +1,62 @@
+body {
+	font-family:arial;
+
+}
+
+.month-view {
+	width:90%;
+	margin-left:auto;
+	margin-right:auto;
+
+}
+
+.month-view .month-name {
+	text-align:center;
+	font-size:21px;
+	margin-bottom:15px;
+
+}
+
+.month-view table {
+	width:100%;
+	border-spacing: 10px;
+	border-collapse: collapse;
+	
+}
+
+.month-view table td {
+	
+	padding:1px;
+	border:1px solid #999999;
+	width:14%;
+
+}
+
+.month-view table td.blank {
+	background-color:#DDDDDD;
+
+}
+
+.month-view table td.non-blank {
+	background-color:#EDF7FA;
+
+}
+
+.month-view table td .cell-date {
+	text-align:right;
+	font-size:11px;
+}
+
+.month-view tr:not(:first-child) td {
+    height:80px;
+    vertical-align: text-top;
+}
+
+
+.month-view tr.days-of-week td{
+	background-color:#333366;
+	color:#EEEEEE;
+	text-align:center;
+	font-size:12px;
+
+}
