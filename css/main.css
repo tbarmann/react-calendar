@@ -60,3 +60,14 @@ body {
 	font-size:12px;
 
 }
+
+.month-view ul.event-list {
+	width:100%;
+	list-style-type: none;
+	padding-left:0px;
+	font-size:10px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+}
