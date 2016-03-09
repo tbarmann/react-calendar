@@ -8,7 +8,7 @@ var helpers = {
   //----------------------------------------------------------------------
   // Return the name of the month
   getNameOfMonth : function(m) {
-      var nameOfMonths = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      var nameOfMonths = ['','January','February','March','April','May','June','July','August','September','October','November','December'];
       return nameOfMonths[m];
   },
 

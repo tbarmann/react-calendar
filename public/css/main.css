@@ -10,11 +10,24 @@ body {
 
 }
 
+.month-view-header td.last-month-link, .month-view-header td.next-month-link {
+	font-size:10px;
+	text-transform: uppercase;
+	border:none;
+}
+
+.month-view-header td.next-month-link{
+	text-align:right;
+}
+
+.month-view-header {
+	margin-bottom:10px;
+}
+
 .month-view .month-name {
 	text-align:center;
 	font-size:21px;
-	margin-bottom:15px;
-
+	border:none;
 }
 
 .month-view table {

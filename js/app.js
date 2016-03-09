@@ -34,7 +34,7 @@ var Cell = require('./cell.jsx');
           var thisYear = today.getFullYear();
           var month = this.props.params.month || thisMonth;
           var year = this.props.params.year || thisYear;
-          var events = _.filter(this.state.events,function(event){ return event.m == month;});
+          var events = _.filter(this.state.events,function(event){ return event.m == month && event.y == year;});
           return (
               <CalendarMonth month={month} year={year} events={events}/>
           )
@@ -93,25 +93,58 @@ var Cell = require('./cell.jsx');
 
      var LastMonthLink = React.createClass({
      	render: function(){
-     		var lastMonth = parseInt(this.props.month) == 1 ? 12 : parseInt(this.props.month) -1;
-     		var lastYear = parseInt(this.props.month) == 1 ? parseInt(this.props.year)-1 : this.props.year;
-     		var href = "../" + lastYear + "/" + lastMonth;
+     		var m = parseInt(this.props.month);
+     		var y = parseInt(this.props.year);
+     		var lastMonth = m == 1 ? 12 : m -1;
+     		var lastYear = m == 1 ? y-1 : y;
+     		var href = "/monthView/" + lastYear + "/" + lastMonth;
      		return(<a href={href}>Last month</a>);
      	}
 
      });
+
+     var NextMonthLink = React.createClass({
+     	render: function(){
+     		var m = parseInt(this.props.month);
+     		var y = parseInt(this.props.year);
+     		var lastMonth = m == 12 ? 1 : m+1;
+     		var lastYear = m == 12 ? y+1 : y;
+     		var href = "/monthView/" + lastYear + "/" + lastMonth;
+     		return(<a href={href}>Next month</a>);
+     	}
+
+     });
+
+
+
+    var MonthViewHeader = React.createClass({
+    	render: function(){	
+    	var monthName = helpers.getNameOfMonth(this.props.month);	
+    		return(
+    			<table className="month-view-header">
+    				<tbody>
+    					<tr>
+    						<td className="last-month-link"><LastMonthLink month={this.props.month} year={this.props.year}/></td>
+					        <td className="month-name">{monthName} {this.props.year}</td>
+            				<td className="next-month-link"><NextMonthLink month={this.props.month} year={this.props.year}/></td>
+            			</tr>
+            		</tbody>
+    			</table>
+    			);
+    	}
+
+
+    });
 
     var CalendarMonth = React.createClass({
       render() {
         var m = parseInt(this.props.month) -1 ; // adjust for 0 based index of months
         var y = parseInt(this.props.year);
         var weeks = helpers.getCalendarMonthArray(m,y);
-        var monthName = helpers.getNameOfMonth(m);
         var events = this.props.events;
         return (
           <div className="month-view">
-          	<LastMonthLink month={this.props.month} year={y}/>
-            <div className="month-name">{monthName} {y}</div>
+          	<MonthViewHeader month={this.props.month} year={y}/>
             <table>
               <tbody>
                 <DaysOfWeek/>
