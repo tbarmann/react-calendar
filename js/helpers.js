@@ -18,7 +18,7 @@ var helpers = {
 		var m = utc ? utc.getUTCMonth() : utc.getMonth();
 		// If feb.
 		if (m == 1) {
-			return isLeapYear(utc) ? 29 : 28;
+			return this.isLeapYear(utc) ? 29 : 28;
 		}
 		// If Apr, Jun, Sep or Nov return 30; otherwise 31
 		return (m == 3 || m == 5 || m == 8 || m == 10) ? 30 : 31;
