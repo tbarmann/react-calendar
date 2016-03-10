@@ -8,11 +8,12 @@ var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var Navigation = ReactRouter.Navigation;
 var History = ReactRouter.History;
-
+var DefaultRoute = ReactRouter.DefaultRoute;
 var createBrowserHistory = require('history/lib/createBrowserHistory');
-
 var helpers = require('./helpers.js');
-var Cell = require('./cell.jsx');
+var CalendarMonth = require('./CalendarMonth.jsx');
+
+
 
       var App = React.createClass({
         getInitialState() {
@@ -28,153 +29,40 @@ var Cell = require('./cell.jsx');
             }.bind(this))
         },
 
+        addEvent : function (event){
+        	this.state.events.push(event);
+        	this.setState({events:this.state.events});
+        },
         render(){
           var today = new Date();
-          var thisMonth = today.getMonth() + 1;
+          var thisMonth = today.getMonth() + 1; // getMonth() returns 0 to 11
           var thisYear = today.getFullYear();
           var month = this.props.params.month || thisMonth;
           var year = this.props.params.year || thisYear;
           var events = _.filter(this.state.events,function(event){ return event.m == month && event.y == year;});
           return (
-              <CalendarMonth month={month} year={year} events={events}/>
+              <CalendarMonth month={month} year={year} events={events} addEvent={this.addEvent}/>
           )
         }
 
       });
 
-  
-     var CellDate = React.createClass({
-        render(){
-          var day = this.props.day;
-          return (
-            <div className="cell-date">
-              {day === null ? "" : day}
-            </div>
-            )
-        }
-
-      });
-
-    var ListEvents = React.createClass({
-        render(){
-         var events = this.props.events;
-          return (
-            <ul className="event-list">
-              {events.map(function(event,i){
-                return(
-                  <li className="event" key={i}>{event.t} {event.title}</li>
-                  );
-                })
-              }
-              </ul>
-          );
-        }
-
-      });
-
-    var DaysOfWeek = React.createClass({
-       render(){
-       var daysFull = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-        return (
-            <tr className="days-of-week">
-                {
-                  daysFull.map(function(day,i){
-                    return (<td key={i}>{day}</td>);
-                  }
-                )}
-            </tr>
-          )
-
-      }
 
 
-    });
-
-
-     var LastMonthLink = React.createClass({
-     	render: function(){
-     		var m = parseInt(this.props.month);
-     		var y = parseInt(this.props.year);
-     		var lastMonth = m == 1 ? 12 : m -1;
-     		var lastYear = m == 1 ? y-1 : y;
-     		var href = "/monthView/" + lastYear + "/" + lastMonth;
-     		return(<a href={href}>Last month</a>);
-     	}
-
-     });
-
-     var NextMonthLink = React.createClass({
-     	render: function(){
-     		var m = parseInt(this.props.month);
-     		var y = parseInt(this.props.year);
-     		var lastMonth = m == 12 ? 1 : m+1;
-     		var lastYear = m == 12 ? y+1 : y;
-     		var href = "/monthView/" + lastYear + "/" + lastMonth;
-     		return(<a href={href}>Next month</a>);
-     	}
-
-     });
-
-
-
-    var MonthViewHeader = React.createClass({
-    	render: function(){	
-    	var monthName = helpers.getNameOfMonth(this.props.month);	
-    		return(
-    			<table className="month-view-header">
-    				<tbody>
-    					<tr>
-    						<td className="last-month-link"><LastMonthLink month={this.props.month} year={this.props.year}/></td>
-					        <td className="month-name">{monthName} {this.props.year}</td>
-            				<td className="next-month-link"><NextMonthLink month={this.props.month} year={this.props.year}/></td>
-            			</tr>
-            		</tbody>
-    			</table>
-    			);
-    	}
-
-
-    });
-
-    var CalendarMonth = React.createClass({
-      render() {
-        var m = parseInt(this.props.month) -1 ; // adjust for 0 based index of months
-        var y = parseInt(this.props.year);
-        var weeks = helpers.getCalendarMonthArray(m,y);
-        var events = this.props.events;
-        return (
-          <div className="month-view">
-          	<MonthViewHeader month={this.props.month} year={y}/>
-            <table>
-              <tbody>
-                <DaysOfWeek/>
-                {weeks.map(function(week, i) {
-                  return (
-                    <tr key={i}>
-                      {week.map(function(day, j) {
-                        var todaysEvents = _.filter(events,function(event){ return event.d == day;});
-                        return (
-                          <td key={j} className={day === null ? "blank" : "non-blank"}>
-                              <CellDate day={day}/>
-                              <ListEvents events={todaysEvents}/>
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  );
-                })}  
-              </tbody>
-            </table>
-          </div>
-          );
-
-      }
-
-    });
-
-	
 
 window.startCalendar = function(){
+
+
+	
+	// var now = new Date();
+	// var defaultPath = "/monthView/" + now.getFullYear + "/" + 
+
+	// var RedirectToDefaultValue = React.createClass({
+	//   willTransitionTo (transition, params) {
+	//     transition.redirect(`/${params.user}/defaultValue`);
+	//   },
+	//   render () { return null; }
+	// });
 
 	var routes = (
 		<Router history={createBrowserHistory()}>
