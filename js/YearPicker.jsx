@@ -5,27 +5,19 @@ var _ = require('underscore');
 
 
     handleSelect: function(event) {
-      this.setState({year:this.refs.yearPicker.value});
+      this.props.setDate({year:event.target.value});
      }, 
     
-    getInitialState: function (){
-    return { 
-        year:null
-      }
-
-  },
-  componentDidMount: function(){
-    	var now = new Date();
-      	var thisYear = now.getFullYear(); 
-        var yearSelected = parseInt(this.props.year || thisYear);  
-        this.setState({year:yearSelected});
-  },
-
   	render: function (){
-      	var yearRange = _.range(this.state.year-5,this.state.year+5);
+        var yearRange = [];
+        if (this.props.date.year !== undefined) {
+          var startYear = parseInt(this.props.date.year) -5 ;
+          var endYear = parseInt(this.props.date.year) + 5;
+        	var yearRange = _.range(startYear,endYear);
+        }
 
   		return (
-  				<select className = "year-picker" ref="yearPicker" value={this.state.year} onChange={this.handleSelect}>
+  				<select className = "year-picker" ref="yearPicker" value={this.props.date.year} onChange={this.handleSelect}>
   					{ yearRange.map(function(year,i){
   						return (
   							<option key={i} value={year}>{year}</option>

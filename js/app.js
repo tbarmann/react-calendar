@@ -3,6 +3,7 @@ var $ = require('jquery');
 var React = require('react');
 var ReactDOM = require('react-dom');
 var ReactRouter = require('react-router');
+var Redirect = ReactRouter.Redirect;
 
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
@@ -34,6 +35,7 @@ var CalendarMonth = require('./CalendarMonth.jsx');
         	this.setState({events:this.state.events});
         },
         render: function(){
+          console.log(this.props.params);
           var today = new Date();
           var thisMonth = today.getMonth() + 1; // getMonth() returns 0 to 11
           var thisYear = today.getFullYear();
@@ -54,21 +56,13 @@ window.startCalendar = function(){
 
 
 	
-	// var now = new Date();
-	// var defaultPath = "/monthView/" + now.getFullYear + "/" + 
-
-	// var RedirectToDefaultValue = React.createClass({
-	//   willTransitionTo (transition, params) {
-	//     transition.redirect(`/${params.user}/defaultValue`);
-	//   },
-	//   render () { return null; }
-	// });
-
+	var now = new Date();
+	var defaultPath = "/monthView/" + now.getFullYear() + "/" + parseInt(now.getMonth()+1);
 	var routes = (
 		<Router history={createBrowserHistory()}>
-			<Route path="/" component={App} />
-			<Route path="monthView/:year/:month" component={App} />
-			<Route path="*" component={App} />
+			<Redirect from="/" to={defaultPath} />
+			<Route path="/monthView/:year/:month" component={App} />
+			<Redirect from="/monthView/*" to={defaultPath} />
 
 		</Router>
 	);
