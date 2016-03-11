@@ -1,7 +1,7 @@
   var React = require('react');
 
   var DaysOfWeek = React.createClass({
-       render(){
+       render: function(){
        var daysFull = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
         return (
             <tr className="days-of-week">

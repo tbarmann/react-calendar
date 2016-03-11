@@ -16,24 +16,24 @@ var CalendarMonth = require('./CalendarMonth.jsx');
 
 
       var App = React.createClass({
-        getInitialState() {
+        getInitialState: function () {
           return {events:[]};
         },
-        componentDidMount () {
+        componentDidMount: function () {
           this.loadEvents();
         },
 
-        loadEvents(){
+        loadEvents: function(){
             $.getJSON('/data/events.js',function(data){
                this.setState({events:data});
             }.bind(this))
         },
 
-        addEvent : function (event){
+        addEvent: function (event){
         	this.state.events.push(event);
         	this.setState({events:this.state.events});
         },
-        render(){
+        render: function(){
           var today = new Date();
           var thisMonth = today.getMonth() + 1; // getMonth() returns 0 to 11
           var thisYear = today.getFullYear();
@@ -67,7 +67,7 @@ window.startCalendar = function(){
 	var routes = (
 		<Router history={createBrowserHistory()}>
 			<Route path="/" component={App} />
-			<Route path="/monthView/:year/:month" component={App} />
+			<Route path="monthView/:year/:month" component={App} />
 			<Route path="*" component={App} />
 
 		</Router>

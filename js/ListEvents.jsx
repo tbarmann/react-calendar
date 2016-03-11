@@ -1,7 +1,7 @@
  var React = require('react');
 
    var ListEvents = React.createClass({
-        render(){
+        render: function(){
          var events = this.props.events;
           return (
             <ul className="event-list">

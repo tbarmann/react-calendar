@@ -10,7 +10,7 @@ var _ = require('underscore');
 
 
    var CalendarMonth = React.createClass({
-      render() {
+      render: function() {
         var m = parseInt(this.props.month); 
         var y = parseInt(this.props.year);
         var weeks = helpers.getCalendarMonthArray(m-1,y); // adjust for 0 based index of months

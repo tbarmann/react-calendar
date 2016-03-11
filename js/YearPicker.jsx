@@ -4,24 +4,24 @@ var _ = require('underscore');
  var YearPicker = React.createClass({
 
 
-     handleSelect: function(event) {
+    handleSelect: function(event) {
       this.setState({year:this.refs.yearPicker.value});
      }, 
     
-    getInitialState : function (){
+    getInitialState: function (){
     return { 
         year:null
       }
 
   },
-  componentDidMount : function(){
+  componentDidMount: function(){
     	var now = new Date();
       	var thisYear = now.getFullYear(); 
         var yearSelected = parseInt(this.props.year || thisYear);  
         this.setState({year:yearSelected});
   },
 
-  	render : function (){
+  	render: function (){
       	var yearRange = _.range(this.state.year-5,this.state.year+5);
 
   		return (
