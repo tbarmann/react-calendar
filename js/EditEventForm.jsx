@@ -1,9 +1,16 @@
 var React = require('react');
 var DatePicker = require('./DatePicker.jsx');
+var $ = require('jquery');
 
 var EditEventForm =  React.createClass({
-	createEvent : function () {
-		return;
+	createEvent : function (event) {
+		event.preventDefault();
+		var elements = this.refs.eventForm.elements;
+		$.each(elements,function(index,value){
+			console.log(value.value);
+		});
+	
+
 	},
 	render : function(){
 		return (
