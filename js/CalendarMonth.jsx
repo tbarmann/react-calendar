@@ -16,9 +16,10 @@ var _ = require('underscore');
         var weeks = helpers.getCalendarMonthArray(m-1,y); // adjust for 0 based index of months
         var events = this.props.events;
         var addEvent = this.props.addEvent;
+        var setDate = this.props.setDate;
         return (
           <div className="month-view">
-          	<MonthViewHeader addEvent={addEvent} month={this.props.month} year={y}/>
+          	<MonthViewHeader addEvent={addEvent} month={m} year={y}/>
             <table>
               <tbody>
                 <DaysOfWeek/>
@@ -29,7 +30,7 @@ var _ = require('underscore');
                         var todaysEvents = _.filter(events,function(event){ return event.d == day;});
                         return (
                           <td key={j} className={day === null ? "blank" : "non-blank"}>
-                              <CellDate month={m} year={y} day={day} addEvent={addEvent}/>
+                              <CellDate month={m} year={y} day={day} addEvent={addEvent} setDate={setDate}/>
                               <ListEvents events={todaysEvents}/>
                           </td>
                         );

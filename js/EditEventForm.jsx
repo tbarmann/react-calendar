@@ -5,7 +5,10 @@ var $ = require('jquery');
 
 var EditEventForm =  React.createClass({
 	createEvent : function (event) {
-		thisEvent = {};
+		thisEvent = {
+			id : Date.now()
+
+		};
 		event.preventDefault();
 		var elements = this.refs.eventForm.elements;
 		$.each(elements,function(index,value){
@@ -16,8 +19,6 @@ var EditEventForm =  React.createClass({
 		});
 		this.props.addEvent(thisEvent);
 		this.refs.eventForm.reset();
-
-	
 
 	},
 	render : function(){

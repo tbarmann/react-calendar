@@ -38,7 +38,7 @@ var base = Rebase.createClass("https://react-calendar.firebaseio.com/")
 
         addEvent: function (event){
         	console.log(event);
-        	this.state.events.push(event);
+        	this.state.events[event.id] = event;
         	this.setState({events:this.state.events});
         },
         render: function(){

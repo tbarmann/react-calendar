@@ -7,7 +7,7 @@
             <ul className="event-list">
               {events.map(function(event,i){
                 return(
-                  <li className="event" key={i}>{event.t} {event.title}</li>
+                  <li id={event.id} className="event" key={i}>{event.t} {event.title}</li>
                   );
                 })
               }
