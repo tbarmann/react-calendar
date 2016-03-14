@@ -4,12 +4,14 @@ var EditEventForm = require('./EditEventForm.jsx');
 var LastMonthLink = require('./LastMonthLink.jsx');
 var NextMonthLink = require('./NextMonthLink.jsx');
 
+
    var MonthViewHeader = React.createClass({
     	render: function(){	
-    	var monthName = helpers.getNameOfMonth(this.props.month);	
+    	var monthName = helpers.getNameOfMonth(this.props.month);
+        var addEvent = this.props.addEvent;	
     		return(
     			<div>
-                    <EditEventForm />
+                    <EditEventForm addEvent={addEvent} displayMonth={this.props.month} displayYear={this.props.year}/>
                     <table className="month-view-header">
         				<tbody>
         					<tr>

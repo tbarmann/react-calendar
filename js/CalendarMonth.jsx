@@ -18,7 +18,7 @@ var _ = require('underscore');
         var addEvent = this.props.addEvent;
         return (
           <div className="month-view">
-          	<MonthViewHeader month={this.props.month} year={y}/>
+          	<MonthViewHeader addEvent={addEvent} month={this.props.month} year={y}/>
             <table>
               <tbody>
                 <DaysOfWeek/>

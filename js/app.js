@@ -13,15 +13,21 @@ var DefaultRoute = ReactRouter.DefaultRoute;
 var createBrowserHistory = require('history/lib/createBrowserHistory');
 var helpers = require('./helpers.js');
 var CalendarMonth = require('./CalendarMonth.jsx');
+var Rebase = require('re-base');
+var base = Rebase.createClass("https://react-calendar.firebaseio.com/")
 
 
 
       var App = React.createClass({
         getInitialState: function () {
-          return {events:[]};
+          return {events:[{m:null,y:null,d:null,t:null,title:null}]};
         },
         componentDidMount: function () {
-          this.loadEvents();
+        //    this.loadEvents();
+  			base.syncState('events', {
+			context: this,
+			state: 'events'
+		})
         },
 
         loadEvents: function(){
@@ -31,11 +37,11 @@ var CalendarMonth = require('./CalendarMonth.jsx');
         },
 
         addEvent: function (event){
+        	console.log(event);
         	this.state.events.push(event);
         	this.setState({events:this.state.events});
         },
         render: function(){
-          console.log(this.props.params);
           var today = new Date();
           var thisMonth = today.getMonth() + 1; // getMonth() returns 0 to 11
           var thisYear = today.getFullYear();

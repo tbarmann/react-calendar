@@ -11,13 +11,6 @@ var helpers = require('./helpers.js');
       this.props.setDate({day:event.target.value});
      }, 
     
-  componentDidMount : function(){
-  
-
-
-
-  },
-
   	render : function (){
 
       if ((this.props.date.month !== undefined) && (this.props.date.year !== undefined)) {
@@ -27,7 +20,7 @@ var helpers = require('./helpers.js');
 
       var dayRange = _.range(1,daysInMonth+1);  // _.range end value is not included in the range so it is incremented by 1
   		return (
-  				<select className = "day-picker" ref="dayPicker" value={this.props.date.day} onChange={this.handleSelect}>
+  				<select name="d" className = "day-picker" ref="dayPicker" value={this.props.date.day} onChange={this.handleSelect}>
   					{ dayRange.map(function(day,i){
   						return (
   							<option key={i} value={day}>{day}</option>

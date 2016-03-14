@@ -3,13 +3,12 @@
   var CellDate = React.createClass({
   
       onAddEvent: function(e){
-         console.log(this);
           e.preventDefault();
           var month = this.props.month;
           var year = this.props.year;
           var day = this.props.day;
           var testEvent = { "m": month, "d":day, "y":year, "t": "2pm", "title": "Just a test event"};
-          this.props.addEvent(testEvent);
+          // this.props.addEvent(testEvent);
         },
       render: function(){
         var day = this.props.day;

@@ -10,7 +10,7 @@ var React = require('react');
 
 
   		return (
-  				<select  className = "month-picker" value={this.props.date.month} onChange={this.handleSelect}>
+  				<select name="m" className = "month-picker" value={this.props.date.month} onChange={this.handleSelect}>
   					{months.map(function(month,i){
   						return (
   							<option key={i} value={i+1}>{month}</option>

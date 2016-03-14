@@ -17,7 +17,7 @@ var _ = require('underscore');
         }
 
   		return (
-  				<select className = "year-picker" ref="yearPicker" value={this.props.date.year} onChange={this.handleSelect}>
+  				<select name="y" className = "year-picker" ref="yearPicker" value={this.props.date.year} onChange={this.handleSelect}>
   					{ yearRange.map(function(year,i){
   						return (
   							<option key={i} value={year}>{year}</option>

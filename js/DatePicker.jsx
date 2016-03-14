@@ -3,6 +3,7 @@ var _ = require('underscore');
 var MonthPicker = require('./MonthPicker.jsx');
 var DayPicker = require('./DayPicker.jsx');
 var YearPicker = require('./YearPicker.jsx');
+var TimePicker = require('./TimePicker.jsx');
 
   var DatePicker = React.createClass({
     
@@ -35,7 +36,7 @@ var YearPicker = require('./YearPicker.jsx');
 
   	render : function (){
       return(
-        <span className="date-picker"><MonthPicker setDate={this.setDate} date={this.state}/> <DayPicker setDate={this.setDate} date={this.state}/> <YearPicker setDate={this.setDate} date={this.state}/></span>
+        <span className="date-picker"><MonthPicker setDate={this.setDate} date={this.state}/> <DayPicker setDate={this.setDate} date={this.state}/> <YearPicker setDate={this.setDate} date={this.state}/> <TimePicker/></span>
         );
  
   	}
