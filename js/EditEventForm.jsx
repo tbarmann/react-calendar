@@ -11,16 +11,17 @@ var EditEventForm =  React.createClass({
 
 		};
 		event.preventDefault();
+		// get all elements except the submit button
 		var elements = _.reject(this.refs.eventForm.elements, function(element) {return element.value.type == "submit"});
-
 		$.each(elements,function(index,value){
-			
-					thisEvent[value.name] = value.value;
-				
-
+			thisEvent[value.name] = value.value;
 		});
 		this.props.addEvent(thisEvent);
 		this.refs.eventForm.reset();
+		var redirectTo = "/monthView/" + thisEvent.y + "/" + thisEvent.m;
+		if (window.location.pathname !== redirectTo) {
+			window.location.pathname = redirectTo;
+		}
 
 	},
 	render : function(){

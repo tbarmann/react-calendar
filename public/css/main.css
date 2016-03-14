@@ -84,3 +84,24 @@ body {
 	text-overflow: ellipsis;
 
 }
+
+.edit-button-hover {
+	width:6px;
+	height:6px;
+	border:1px solid #DDDDDD;
+	background: url('./images/buttons.png') 104px -2px;
+	display:inline-block;
+	margin-left:2px;
+
+}
+
+.delete-button-hover {
+	width:6px;
+	height:6px;
+	border:1px solid #DDDDDD;
+	background: url('./images/buttons.png') 104px -12px;
+	display:inline-block;
+	margin-left:2px;
+
+
+}
