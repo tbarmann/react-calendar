@@ -1,6 +1,7 @@
 var React = require('react');
 var DatePicker = require('./DatePicker.jsx');
 var $ = require('jquery');
+var _ = require('underscore');
 
 
 var EditEventForm =  React.createClass({
@@ -10,11 +11,12 @@ var EditEventForm =  React.createClass({
 
 		};
 		event.preventDefault();
-		var elements = this.refs.eventForm.elements;
+		var elements = _.reject(this.refs.eventForm.elements, function(element) {return element.value.type == "submit"});
+
 		$.each(elements,function(index,value){
-				if (value.type !== "submit") {  // skip the submit button
+			
 					thisEvent[value.name] = value.value;
-				}
+				
 
 		});
 		this.props.addEvent(thisEvent);
