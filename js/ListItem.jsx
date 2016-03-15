@@ -6,8 +6,8 @@
             return {hover: false};
         },
 
-        handleRemoveEvent: function(event){
-          this.props.removeEvent(event.target.id);
+        handleRemoveEvent: function(){
+          this.props.removeEvent(this.props.event.id);
         },
         mouseOver: function(event){
           this.setState({hover: true});
@@ -22,8 +22,8 @@
           
           return(
             <li className="event" onMouseOver={this.mouseOver} onMouseOut={this.mouseOut}>
-            <span> {event.t} {event.title} </span>
-            <span id={event.id} onClick={handleRemoveEvent} className={thisClass}></span>
+              <span> {event.t} {event.title} </span>
+              <span onClick={handleRemoveEvent} className={thisClass}></span>
             </li>
           )
           }
