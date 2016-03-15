@@ -1,22 +1,15 @@
  var React = require('react');
+ var ListItem = require('./ListItem.jsx');
 
    var ListEvents = React.createClass({
-
-        handleRemoveEvent: function(event){
-          this.props.removeEvent(event.target.id);
-        }, 
         render: function(){
          var events = this.props.events;
-         var handleRemoveEvent = this.handleRemoveEvent;
+         var removeEvent = this.props.removeEvent;
           return (
             <ul className="event-list">
               {events.map(function(event,i){
                 return(
-                    <li id={event.id} className="event" key={i}>
-                    <span> {event.t} {event.title} </span>
-                    <span id={event.id} onClick={handleRemoveEvent} className="delete-button-hover"></span>
-                    <span className="edit-button-hover"></span>
-                    </li>
+                    <ListItem key={i} event={event} removeEvent={removeEvent}/>
                   );
                 })
               }

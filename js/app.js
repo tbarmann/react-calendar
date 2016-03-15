@@ -23,7 +23,7 @@ var base = Rebase.createClass("https://react-calendar.firebaseio.com/")
           return {events:[{m:null,y:null,d:null,t:null,title:null}]};
         },
         componentDidMount: function () {
-            this.loadEvents();
+        //    this.loadEvents();
   			base.syncState('events', {
 			context: this,
 			state: 'events'

@@ -88,20 +88,28 @@ body {
 .edit-button-hover {
 	width:6px;
 	height:6px;
-	border:1px solid #DDDDDD;
+	border:1px solid #AAAAAA;
 	background: url('./images/buttons.png') 104px -2px;
 	display:inline-block;
-	margin-left:2px;
+	margin-left:1px;
 
 }
 
 .delete-button-hover {
 	width:6px;
 	height:6px;
-	border:1px solid #DDDDDD;
+	border:1px solid #AAAAAA;
 	background: url('./images/buttons.png') 104px -12px;
 	display:inline-block;
-	margin-left:2px;
+	margin-left:1px;
 
 
+}
+
+.delete-button {
+	width:8px;
+	height:8px;
+	border:0;
+	display:inline-block;
+	margin-left:1px;
 }
