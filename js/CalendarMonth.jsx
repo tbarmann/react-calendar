@@ -16,6 +16,7 @@ var _ = require('underscore');
         var weeks = helpers.getCalendarMonthArray(m-1,y); // adjust for 0 based index of months
         var events = this.props.events;
         var addEvent = this.props.addEvent;
+        var removeEvent = this.props.removeEvent;
         var setDate = this.props.setDate;
         return (
           <div className="month-view">
@@ -31,7 +32,7 @@ var _ = require('underscore');
                         return (
                           <td key={j} className={day === null ? "blank" : "non-blank"}>
                               <CellDate month={m} year={y} day={day} addEvent={addEvent} setDate={setDate}/>
-                              <ListEvents events={todaysEvents}/>
+                              <ListEvents events={todaysEvents} removeEvent={removeEvent}/>
                           </td>
                         );
                       })}

@@ -36,8 +36,16 @@ var base = Rebase.createClass("https://react-calendar.firebaseio.com/")
             }.bind(this))
         },
 
+        removeEvent: function(id) {
+          console.log("Removing event with id: " + id);
+          console.log(this.state.events);
+          var newData = this.state.events.slice(); //copy array
+          newData.splice(id, 1); //remove element
+          this.setState({events: newData}); //update state
+
+        },
+
         addEvent: function (event){
-        	console.log(event);
         	this.state.events[event.id] = event;
         	this.setState({events:this.state.events});
         },
@@ -49,7 +57,7 @@ var base = Rebase.createClass("https://react-calendar.firebaseio.com/")
           var year = this.props.params.year || thisYear;
           var events = _.filter(this.state.events,function(event){ return event.m == month && event.y == year;});
           return (
-              <CalendarMonth month={month} year={year} events={events} addEvent={this.addEvent}/>
+              <CalendarMonth month={month} year={year} events={events} addEvent={this.addEvent} removeEvent={this.removeEvent}/>
           )
         }
 
