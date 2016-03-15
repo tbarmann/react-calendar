@@ -23,11 +23,11 @@ var base = Rebase.createClass("https://react-calendar.firebaseio.com/")
           return {events:[{m:null,y:null,d:null,t:null,title:null}]};
         },
         componentDidMount: function () {
-        //    this.loadEvents();
+            this.loadEvents();
   			base.syncState('events', {
 			context: this,
 			state: 'events'
-		})
+			})
         },
 
         loadEvents: function(){
@@ -37,11 +37,8 @@ var base = Rebase.createClass("https://react-calendar.firebaseio.com/")
         },
 
         removeEvent: function(id) {
-          console.log("Removing event with id: " + id);
-          console.log(this.state.events);
-          var newData = this.state.events.slice(); //copy array
-          newData.splice(id, 1); //remove element
-          this.setState({events: newData}); //update state
+          this.state.events[id] = null;
+          this.setState({events:this.state.events});
 
         },
 
