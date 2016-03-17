@@ -11,9 +11,12 @@ module.exports = {
         inline: true,
         port: 8080
     },
+    resolve: {
+        extensions: ['', '.js', '.jsx'],
+    },
     module: {
         loaders: [
-            { test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/, query: {presets:["react"]} },
+            { test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/, query: {presets:["react","es2015"]} },
             { test: /\.css$/, loader: "style!css" }
         ]
     }

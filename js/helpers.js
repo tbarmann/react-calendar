@@ -32,7 +32,7 @@ var helpers = {
   		var cell_ptr=0;
 
   		while (curr_day<=end_day) {
-  			days = [];
+  			var days = [];
   			for (var j=0;j<7;j++) {
   				if ((cell_ptr<begin_cell)||(curr_day>end_day)) {
   					days.push(null);

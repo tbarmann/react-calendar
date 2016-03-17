@@ -6,10 +6,11 @@
             return {hover: false};
         },
 
-        handleRemoveEvent: function(){
+        handleRemoveEvent: function(e){
+          e.preventDefault();
           this.props.removeEvent(this.props.event.id);
         },
-        mouseOver: function(event){
+        mouseOver: function(){
           this.setState({hover: true});
         },
         mouseOut: function(){

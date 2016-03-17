@@ -9,7 +9,7 @@ var _ = require('underscore');
 
 
 
-   var CalendarMonth = React.createClass({
+const CalendarMonth = React.createClass({
       render: function() {
         var m = parseInt(this.props.month); 
         var y = parseInt(this.props.year);
