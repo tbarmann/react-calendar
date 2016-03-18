@@ -15,14 +15,20 @@ const base = Rebase.createClass('https://react-calendar.firebaseio.com/');
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { events: [] };
+    this.state = {
+      events: {},
+      history: [
+        { test: 1 }] };
   }
 
   componentDidMount() {
-    // this.loadEvents();
+    this.loadEvents();
     base.syncState('events', {
       context: this,
       state: 'events' });
+    base.syncState('history', {
+      context: this,
+      state: 'history' });
   }
 
   loadEvents() {
@@ -31,13 +37,15 @@ class App extends React.Component {
     });
   }
   removeEvent(id) {
-    this.state.events[id] = null;
-    this.setState({ events: this.state.events });
+    base.post(`events/${id}`, {
+      data: null,
+    });
   }
 
   addEvent(event) {
-    this.state.events[event.id] = event;
-    this.setState({ events: this.state.events });
+    base.post(`events/${event.id}`, {
+      data: event,
+    });
   }
 
   render() {
@@ -46,6 +54,7 @@ class App extends React.Component {
     const thisYear = today.getFullYear();
     const month = parseInt(this.props.params.month, 10) || thisMonth;
     const year = parseInt(this.props.params.year, 10) || thisYear;
+   // debugger;
     const events = _.filter(this.state.events,
       (event) => event.m === month && event.y === year);
     return (
