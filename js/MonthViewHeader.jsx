@@ -6,12 +6,14 @@ var NextMonthLink = require('./NextMonthLink.jsx');
 
 
    var MonthViewHeader = React.createClass({
-    	render: function(){	
+    	render: function(){
     	var monthName = helpers.getNameOfMonth(this.props.month);
-        var addEvent = this.props.addEvent;	
+        var addEvent = this.props.addEvent;
+        var undo = this.props.undo;
+        var historySize = this.props.historySize;
     		return(
     			<div>
-                    <EditEventForm addEvent={addEvent} displayMonth={this.props.month} displayYear={this.props.year}/>
+                    <EditEventForm undo={undo} historySize={historySize} addEvent={addEvent} displayMonth={this.props.month} displayYear={this.props.year}/>
                     <table className="month-view-header">
         				<tbody>
         					<tr>

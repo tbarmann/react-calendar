@@ -11,16 +11,18 @@ var _ = require('underscore');
 
 const CalendarMonth = React.createClass({
       render: function() {
-        var m = parseInt(this.props.month); 
+        var m = parseInt(this.props.month);
         var y = parseInt(this.props.year);
         var weeks = helpers.getCalendarMonthArray(m-1,y); // adjust for 0 based index of months
         var events = this.props.events;
         var addEvent = this.props.addEvent;
         var removeEvent = this.props.removeEvent;
         var setDate = this.props.setDate;
+        var undo = this.props.undo;
+        var historySize = this.props.historySize;
         return (
           <div className="month-view">
-          	<MonthViewHeader addEvent={addEvent} month={m} year={y}/>
+          	<MonthViewHeader undo={undo} historySize={historySize} addEvent={addEvent} month={m} year={y}/>
             <table>
               <tbody>
                 <DaysOfWeek/>
@@ -38,7 +40,7 @@ const CalendarMonth = React.createClass({
                       })}
                     </tr>
                   );
-                })}  
+                })}
               </tbody>
             </table>
           </div>
