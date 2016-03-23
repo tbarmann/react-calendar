@@ -17,7 +17,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       events: {},
-      history: {} };
+      history: {},
+      datePickerDate: {},
+    };
   }
 
   componentDidMount() {
@@ -28,6 +30,13 @@ class App extends React.Component {
     base.syncState('history', {
       context: this,
       state: 'history' });
+  }
+
+  setDatePicker(date) {
+    const newState = _.extend({}, this.state);
+    newState.datePickerDate = date;
+    this.setState(newState);
+   // debugger;
   }
 
   pushHistory(action, event) {
@@ -43,20 +52,17 @@ class App extends React.Component {
       const mostRecentEntryKey = entryKeys[0];
       const mostRecentEntry = _.extend({}, this.state.history[mostRecentEntryKey]);
       base.post(`history/${mostRecentEntryKey}`, {
-        data: null
+        data: null,
       });
       return mostRecentEntry;
     }
-    else {
-      return null;
-    }
+    return null;
   }
 
   undo() {
     const saveToHistory = false;
     // get most recent entry from history
     const entry = this.popHistory();
-    console.log(entry);
     // reverse it
     const action = entry.action;
     // debugger;
@@ -85,7 +91,7 @@ class App extends React.Component {
     base.post(`events/${id}`, {
       data: null,
       then() {
-        if (saveToHistory===true) {
+        if (saveToHistory === true) {
           self.pushHistory('delete', event);
         }
       },
@@ -97,7 +103,7 @@ class App extends React.Component {
     base.post(`events/${event.id}`, {
       data: event,
       then() {
-        if (saveToHistory===true) {
+        if (saveToHistory === true) {
           self.pushHistory('add', event);
         }
       },
@@ -106,6 +112,7 @@ class App extends React.Component {
 
   render() {
     const today = new Date();
+    const datePickerDate = this.state.datePickerDate;
     const thisMonth = today.getMonth() + 1; // getMonth() returns 0 to 11
     const thisYear = today.getFullYear();
     const month = parseInt(this.props.params.month, 10) || thisMonth;
@@ -121,6 +128,8 @@ class App extends React.Component {
         removeEvent={this.removeEvent.bind(this)}
         historySize={historySize}
         undo={this.undo.bind(this)}
+        datePickerDate={datePickerDate}
+        setDatePicker={this.setDatePicker.bind(this)}
       />
     );
   }

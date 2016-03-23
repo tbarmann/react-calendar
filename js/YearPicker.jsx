@@ -4,20 +4,29 @@ var _ = require('underscore');
  var YearPicker = React.createClass({
 
 
-    handleSelect: function(event) {
-      this.props.setDate({year:event.target.value});
-     }, 
-    
+getInitialState: function () {
+  var defaultYear = new Date().getFullYear();
+  return {year:this.props.datePickerDate.year || defaultYear};
+},
+
+handleSelect: function(e){
+  this.setState({year:e.target.value})
+},
+
+componentWillReceiveProps: function(nextProps) {
+    this.setState({year: nextProps.datePickerDate.year});
+},
+
+
   	render: function (){
-        var yearRange = [];
-        if (this.props.date.year !== undefined) {
-          var startYear = parseInt(this.props.date.year) -5 ;
-          var endYear = parseInt(this.props.date.year) + 5;
-        	var yearRange = _.range(startYear,endYear);
-        }
+
+        var defaultYear = new Date().getFullYear() || this.state.year
+        var startYear = parseInt(defaultYear) -5 ;
+        var endYear = parseInt(defaultYear) + 6;
+        var yearRange = _.range(startYear,endYear);
 
   		return (
-  				<select name="y" className = "year-picker" ref="yearPicker" value={this.props.date.year} onChange={this.handleSelect}>
+  				<select name="y" className = "year-picker" ref="yearPicker" value={this.state.year} onChange={this.handleSelect}>
   					{ yearRange.map(function(year,i){
   						return (
   							<option key={i} value={year}>{year}</option>

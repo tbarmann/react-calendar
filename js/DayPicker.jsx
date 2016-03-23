@@ -1,35 +1,40 @@
 var React = require('react');
 var _ = require('underscore');
 var helpers = require('./helpers.js');
+var DayPicker = React.createClass({
 
+getInitialState: function () {
+    var defaultDay = new Date().getDate();
+    return {day:this.props.datePickerDate.day || defaultDay};
+  },
 
-  
-  var daysInMonth = 0;
-  var DayPicker = React.createClass({
-    
-    handleSelect: function(event) {
-      this.props.setDate({day:event.target.value});
-     }, 
-    
-  	render : function (){
+  handleSelect: function(e){
+    this.setState({day:e.target.value})
+  },
 
-      if ((this.props.date.month !== undefined) && (this.props.date.year !== undefined)) {
-          var d = new Date(this.props.date.year,this.props.date.month-1,1); 
-          daysInMonth = helpers.getDaysInMonth(d);
-        }
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({day: nextProps.datePickerDate.day});
+},
 
-      var dayRange = _.range(1,daysInMonth+1);  // _.range end value is not included in the range so it is incremented by 1
-  		return (
-  				<select name="d" className = "day-picker" ref="dayPicker" value={this.props.date.day} onChange={this.handleSelect}>
-  					{ dayRange.map(function(day,i){
-  						return (
-  							<option key={i} value={day}>{day}</option>
-  							);
-  					})
-  				}
-  				</select>
-	  		);
-  	}
-  });
+render: function (){
 
-  module.exports = DayPicker;
+  var defaultDay = this.props.datePickerDate.day || new Date().getDate();
+  var defaultMonth = this.props.datePickerDate.month || new Date().getMonth() + 1;
+  var defaultYear = this.props.datePickerDate.year || new Date().getFullYear();
+  var d = new Date(defaultYear,defaultMonth-1,1);
+  var daysInMonth = helpers.getDaysInMonth(d);
+  var dayRange = _.range(1,daysInMonth+1);  // _.range end value is not included in the range so it is incremented by 1
+	return (
+			<select name="d" className = "day-picker" ref="dayPicker" value={this.state.day} onChange={this.handleSelect}>
+				{ dayRange.map(function(day,i){
+					return (
+						<option key={i} value={day}>{day}</option>
+						);
+				})
+			}
+			</select>
+		);
+}
+});
+
+module.exports = DayPicker;

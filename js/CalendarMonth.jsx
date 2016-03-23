@@ -11,18 +11,30 @@ var _ = require('underscore');
 
 const CalendarMonth = React.createClass({
       render: function() {
-        var m = parseInt(this.props.month);
-        var y = parseInt(this.props.year);
-        var weeks = helpers.getCalendarMonthArray(m-1,y); // adjust for 0 based index of months
+        var month = parseInt(this.props.month);
+        var year = parseInt(this.props.year);
+        var weeks = helpers.getCalendarMonthArray(month-1,year); // adjust for 0 based index of months
         var events = this.props.events;
         var addEvent = this.props.addEvent;
         var removeEvent = this.props.removeEvent;
         var setDate = this.props.setDate;
         var undo = this.props.undo;
         var historySize = this.props.historySize;
+        var datePickerDate = this.props.datePickerDate;
+        var setDatePicker = this.props.setDatePicker;
+
+
         return (
           <div className="month-view">
-          	<MonthViewHeader undo={undo} historySize={historySize} addEvent={addEvent} month={m} year={y}/>
+          	<MonthViewHeader
+              undo={undo}
+              historySize={historySize}
+              addEvent={addEvent}
+              month={month}
+              year={year}
+              datePickerDate={datePickerDate}
+              setDatePicker={setDatePicker}
+            />
             <table>
               <tbody>
                 <DaysOfWeek/>
@@ -33,7 +45,7 @@ const CalendarMonth = React.createClass({
                         var todaysEvents = _.filter(events,function(event){ return event.d == day;});
                         return (
                           <td key={j} className={day === null ? "blank" : "non-blank"}>
-                              <CellDate month={m} year={y} day={day} addEvent={addEvent} setDate={setDate}/>
+                              <CellDate month={month} year={year} day={day} addEvent={addEvent} setDatePicker={setDatePicker}/>
                               <ListEvents events={todaysEvents} removeEvent={removeEvent}/>
                           </td>
                         );

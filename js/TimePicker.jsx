@@ -3,12 +3,6 @@ var _ = require('underscore');
 
  var TimePicker = React.createClass({
 
-
-     handleSelect: function(event) {
-    //   this.props.setDate({hour:event.target.value});
-      }, 
-    
-  	
 	minutesToStr: function(min){
         	var ampm = min < 720 ? "a" : "p";
         	var hours = parseInt(min/60);
@@ -18,7 +12,7 @@ var _ = require('underscore');
     },
 
   	render: function (){
-        
+
         var minutesToStr = this.minutesToStr;
         var minutes = _.range(0,1440,5);
         var timeArr = minutes.map(function(v){
@@ -26,7 +20,7 @@ var _ = require('underscore');
         });
 
   		return (
-  				<select name="t" className = "time-picker" ref="timePicker" onChange={this.handleSelect}>
+  				<select name="t" className = "time-picker" ref="timePicker">
   					{ timeArr.map(function(t,i){
   						return (
   							<option key={i} value={t}>{t}</option>

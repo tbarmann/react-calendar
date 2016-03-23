@@ -39,10 +39,11 @@ var EditEventForm =  React.createClass({
 		var historySize = this.props.historySize;
 		var undoStatus = historySize > 0 ? "" : "disabled";
 		var handleUndo = this.handleUndo;
+		var datePickerDate = this.props.datePickerDate;
 
 		return (
 			<form className="event-edit" ref="eventForm" onSubmit={createEvent}>
-				<DatePicker />&nbsp;
+				<DatePicker datePickerDate={datePickerDate}/>&nbsp;
 				<input name="title" type="text" ref="title" placeholder="Title" />&nbsp;
 				<button name="submit" value="addItem" type="submit">+ Add Item </button>&nbsp;
 				<button name="undo" value="undo" type="submit" disabled={undoStatus} onClick={handleUndo}>Undo ({historySize})</button>
