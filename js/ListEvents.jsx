@@ -5,11 +5,12 @@
         render: function(){
          var events = this.props.events;
          var removeEvent = this.props.removeEvent;
+         var modifyEvent = this.props.modifyEvent;
           return (
             <ul className="event-list">
               {events.map(function(event,i){
                 return(
-                    <ListItem key={i} event={event} removeEvent={removeEvent}/>
+                    <ListItem key={i} event={event} removeEvent={removeEvent} modifyEvent={modifyEvent}/>
                   );
                 })
               }

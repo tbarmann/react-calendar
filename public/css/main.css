@@ -34,11 +34,11 @@ body {
 	width:100%;
 	border-spacing: 10px;
 	border-collapse: collapse;
-	
+
 }
 
 .month-view table td {
-	
+
 	padding:1px;
 	border:1px solid #999999;
 	width:14%;
@@ -85,7 +85,7 @@ body {
 
 }
 
-.edit-button-hover {
+.modify-button-hover {
 	width:6px;
 	height:6px;
 	border:1px solid #AAAAAA;
@@ -94,6 +94,8 @@ body {
 	margin-left:1px;
 
 }
+
+
 
 .delete-button-hover {
 	width:6px;
@@ -105,8 +107,15 @@ body {
 
 
 }
-
 .delete-button {
+	width:8px;
+	height:8px;
+	border:0;
+	display:inline-block;
+	margin-left:1px;
+}
+
+.modify-button {
 	width:8px;
 	height:8px;
 	border:0;

@@ -98,6 +98,13 @@ class App extends React.Component {
     });
   }
 
+  modifyEvent(id) {
+    const self = this;
+    const event = _.extend({}, this.state.events[id]);
+    console.log(event);
+
+  }
+
   addEvent(event, saveToHistory = true) {
     const self = this;
     base.post(`events/${event.id}`, {
@@ -126,10 +133,12 @@ class App extends React.Component {
         events={events}
         addEvent={this.addEvent.bind(this)}
         removeEvent={this.removeEvent.bind(this)}
+        modifyEvent={this.modifyEvent.bind(this)}
         historySize={historySize}
         undo={this.undo.bind(this)}
         datePickerDate={datePickerDate}
         setDatePicker={this.setDatePicker.bind(this)}
+
       />
     );
   }

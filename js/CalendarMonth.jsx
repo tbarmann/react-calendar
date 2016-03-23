@@ -22,6 +22,7 @@ const CalendarMonth = React.createClass({
         var historySize = this.props.historySize;
         var datePickerDate = this.props.datePickerDate;
         var setDatePicker = this.props.setDatePicker;
+        var modifyEvent = this.props.modifyEvent;
 
 
         return (
@@ -33,7 +34,6 @@ const CalendarMonth = React.createClass({
               month={month}
               year={year}
               datePickerDate={datePickerDate}
-              setDatePicker={setDatePicker}
             />
             <table>
               <tbody>
@@ -46,7 +46,7 @@ const CalendarMonth = React.createClass({
                         return (
                           <td key={j} className={day === null ? "blank" : "non-blank"}>
                               <CellDate month={month} year={year} day={day} addEvent={addEvent} setDatePicker={setDatePicker}/>
-                              <ListEvents events={todaysEvents} removeEvent={removeEvent}/>
+                              <ListEvents events={todaysEvents} removeEvent={removeEvent} modifyEvent={modifyEvent} />
                           </td>
                         );
                       })}
