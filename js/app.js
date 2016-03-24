@@ -19,6 +19,7 @@ class App extends React.Component {
       events: {},
       history: {},
       datePickerDate: {},
+      eventToModify: {},
     };
   }
 
@@ -101,8 +102,12 @@ class App extends React.Component {
   modifyEvent(id) {
     const self = this;
     const event = _.extend({}, this.state.events[id]);
-    console.log(event);
+    this.setDatePicker({month:event.m, day:event.d, year:event.y})
+    this.setState({eventToModify:event});
+  }
 
+  cancelUpdate() {
+    this.setState({eventToModify:{}});
   }
 
   addEvent(event, saveToHistory = true) {
@@ -127,6 +132,8 @@ class App extends React.Component {
     const historySize = _.size(this.state.history);
     const events = _.filter(this.state.events,
       (event) => event.m === month && event.y === year);
+    const eventToModify = this.state.eventToModify;
+
     return (
       <CalendarMonth
         month={month} year={year}
@@ -138,6 +145,8 @@ class App extends React.Component {
         undo={this.undo.bind(this)}
         datePickerDate={datePickerDate}
         setDatePicker={this.setDatePicker.bind(this)}
+        eventToModify={eventToModify}
+        cancelUpdate={this.cancelUpdate.bind(this)}
 
       />
     );

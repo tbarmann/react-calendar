@@ -23,7 +23,7 @@ const CalendarMonth = React.createClass({
         var datePickerDate = this.props.datePickerDate;
         var setDatePicker = this.props.setDatePicker;
         var modifyEvent = this.props.modifyEvent;
-
+        var eventToModify = this.props.eventToModify;
 
         return (
           <div className="month-view">
@@ -34,6 +34,8 @@ const CalendarMonth = React.createClass({
               month={month}
               year={year}
               datePickerDate={datePickerDate}
+              eventToModify={eventToModify}
+              cancelUpdate={this.props.cancelUpdate}
             />
             <table>
               <tbody>

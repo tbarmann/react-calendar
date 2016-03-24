@@ -12,6 +12,7 @@ var NextMonthLink = require('./NextMonthLink.jsx');
         var undo = this.props.undo;
         var historySize = this.props.historySize;
         var datePickerDate = this.props.datePickerDate;
+        var eventToModify = this.props.eventToModify;
 
     		return(
     			<div>
@@ -20,6 +21,8 @@ var NextMonthLink = require('./NextMonthLink.jsx');
                         historySize={historySize}
                         addEvent={addEvent}
                         datePickerDate={datePickerDate}
+                        eventToModify={eventToModify}
+                        cancelUpdate={this.props.cancelUpdate}
                     />
                     <table className="month-view-header">
         				<tbody>
