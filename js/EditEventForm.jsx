@@ -29,45 +29,40 @@ var EditEventForm =  React.createClass({
   	},
 	createEvent: function (e) {
 		e.preventDefault();
-		var thisEvent = {
-			id: Date.now()
-		};
-		var self=this;
-
-		// get all elements except the submit button
-		var elements = _.reject(this.refs.createForm.elements, function(element) {return element.type === "submit"});
-
-		$.each(elements,function(index,value){
-			thisEvent[value.name] = self.isInteger(value.value) ? parseInt(value.value,10) : value.value;
-		});
+		var thisEvent = this.serializeFormElements(this.refs.createForm);
+		thisEvent.id = Date.now();
 		this.props.addEvent(thisEvent);
 		this.refs.createForm.reset();
 		var redirectTo = "/monthView/" + thisEvent.y + "/" + thisEvent.m;
 		if (window.location.pathname !== redirectTo) {
 			window.location.pathname = redirectTo;
 		}
-
 	},
+
 	updateEvent: function(e) {
 		e.preventDefault();
-		var thisEvent = {};
-		var self = this;
-
-		// get all elements except the submit button
-		var elements = _.reject(this.refs.updateForm.elements, function(element) {return element.type === "submit"});
-
-		$.each(elements,function(index,value){
-			thisEvent[value.name] = self.isInteger(value.value) ? parseInt(value.value,10) : value.value;
-		});
-		this.props.updateEvent(thisEvent);
+		var thisEvent = this.serializeFormElements(this.refs.updateForm);
 		this.refs.updateForm.reset();
+		this.props.updateEvent(thisEvent);
 		this.props.cancelUpdate();
 		var redirectTo = "/monthView/" + thisEvent.y + "/" + thisEvent.m;
 		if (window.location.pathname !== redirectTo) {
 			window.location.pathname = redirectTo;
 		}
+	},
 
+	serializeFormElements: function(formRef,ignoreType="submit") {
 
+		// ignore submit buttons by default
+		var form = {};
+		var self=this;
+		var elements = _.reject(formRef.elements, function(element) {return element.type === ignoreType});
+
+		// if a form value is a number, store it as a number, not a string
+		$.each(elements,function(index,value){
+			form[value.name] = self.isInteger(value.value) ? parseInt(value.value,10) : value.value;
+		});
+		return form;
 	},
 	handleUndo: function(e) {
 		e.preventDefault();
