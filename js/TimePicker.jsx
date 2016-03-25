@@ -11,6 +11,18 @@ var _ = require('underscore');
         	return hours + ":" + remainder.slice(-2) + ampm;
     },
 
+    getInitialState: function () {
+      return {t:""};
+    },
+
+    handleSelect: function(e){
+      this.setState({t:e.target.value})
+    },
+
+    componentWillReceiveProps: function(nextProps) {
+        this.setState({t: nextProps.datePickerDate.t});
+    },
+
   	render: function (){
 
         var minutesToStr = this.minutesToStr;
@@ -20,7 +32,7 @@ var _ = require('underscore');
         });
 
   		return (
-  				<select name="t" className = "time-picker" ref="timePicker">
+  				<select name="t" className = "time-picker" ref="timePicker" value={this.state.t} onChange={this.handleSelect}>
   					{ timeArr.map(function(t,i){
   						return (
   							<option key={i} value={t}>{t}</option>

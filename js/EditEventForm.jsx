@@ -6,6 +6,11 @@ var _ = require('underscore');
 
 var EditEventForm =  React.createClass({
 
+
+	isInteger: function(v) {
+		return v.match(/^\d+$/);
+	},
+
 	getInitialState: function() {
 		return {eventToModify: this.props.eventToModify,
 				formType: 'create'};
@@ -27,15 +32,13 @@ var EditEventForm =  React.createClass({
 		var thisEvent = {
 			id: Date.now()
 		};
-		function isInteger(v) {
-			return v.match(/^\d+$/);
-		}
+		var self=this;
 
 		// get all elements except the submit button
 		var elements = _.reject(this.refs.createForm.elements, function(element) {return element.type === "submit"});
 
 		$.each(elements,function(index,value){
-			thisEvent[value.name] = isInteger(value.value) ? parseInt(value.value,10) : value.value;
+			thisEvent[value.name] = self.isInteger(value.value) ? parseInt(value.value,10) : value.value;
 		});
 		this.props.addEvent(thisEvent);
 		this.refs.createForm.reset();
@@ -47,7 +50,22 @@ var EditEventForm =  React.createClass({
 	},
 	updateEvent: function(e) {
 		e.preventDefault();
-		//code to update event
+		var thisEvent = {};
+		var self = this;
+
+		// get all elements except the submit button
+		var elements = _.reject(this.refs.updateForm.elements, function(element) {return element.type === "submit"});
+
+		$.each(elements,function(index,value){
+			thisEvent[value.name] = self.isInteger(value.value) ? parseInt(value.value,10) : value.value;
+		});
+		this.props.updateEvent(thisEvent);
+		this.refs.updateForm.reset();
+		this.props.cancelUpdate();
+		var redirectTo = "/monthView/" + thisEvent.y + "/" + thisEvent.m;
+		if (window.location.pathname !== redirectTo) {
+			window.location.pathname = redirectTo;
+		}
 
 
 	},
@@ -89,6 +107,7 @@ var EditEventForm =  React.createClass({
 			<form className="event-edit" ref="updateForm" onSubmit={updateEvent}>
 				<DatePicker datePickerDate={datePickerDate}/>&nbsp;
 				<input name="title" type="text" ref="title" value={this.state.eventToModify.title} placeholder="Title" onChange={this.handleTitleChange}/>&nbsp;
+				<input name="id" type="hidden" ref="id" value={this.state.eventToModify.id} />
 				<button name="submit" value="addItem" type="submit">Update Item </button>&nbsp;
 				<button name="cancel" value="cancel" type="submit" onClick={handleCancel}>Cancel</button>
 			</form>

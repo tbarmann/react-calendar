@@ -36,6 +36,7 @@ const CalendarMonth = React.createClass({
               datePickerDate={datePickerDate}
               eventToModify={eventToModify}
               cancelUpdate={this.props.cancelUpdate}
+              updateEvent={this.props.updateEvent}
             />
             <table>
               <tbody>

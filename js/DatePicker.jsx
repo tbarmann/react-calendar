@@ -15,7 +15,7 @@ var TimePicker = require('./TimePicker.jsx');
           <MonthPicker datePickerDate={datePickerDate} />
           <DayPicker datePickerDate={datePickerDate}/>
           <YearPicker datePickerDate={datePickerDate}/>
-          <TimePicker/>
+          <TimePicker datePickerDate={datePickerDate}/>
         </span>
         );
 

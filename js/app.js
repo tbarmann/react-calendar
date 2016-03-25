@@ -74,6 +74,9 @@ class App extends React.Component {
       case 'delete':
         this.addEvent(entry.event, saveToHistory);
         break;
+      case 'update':
+        this.updateEvent(entry.event.oldEvent, saveToHistory);
+        break;
       default:
         console.log(`unknown action: ${action}`);
     }
@@ -99,11 +102,28 @@ class App extends React.Component {
     });
   }
 
+
+  // rename to prepareForUpdate(id)
   modifyEvent(id) {
     const self = this;
     const event = _.extend({}, this.state.events[id]);
-    this.setDatePicker({month:event.m, day:event.d, year:event.y})
+    this.setDatePicker({month:event.m, day:event.d, year:event.y, t:event.t})
     this.setState({eventToModify:event});
+  }
+
+  updateEvent(updatedEvent, saveToHistory = true) {
+    const self = this;
+    const oldEvent = _.extend({}, this.state.events[updatedEvent.id]);
+    const entry = {oldEvent: oldEvent, updatedEvent: updatedEvent};
+    base.post(`events/${updatedEvent.id}`, {
+      data: updatedEvent,
+      then() {
+        if (saveToHistory === true) {
+          self.pushHistory('update',entry);
+        }
+        self.cancelUpdate();
+      }
+    });
   }
 
   cancelUpdate() {
@@ -147,6 +167,7 @@ class App extends React.Component {
         setDatePicker={this.setDatePicker.bind(this)}
         eventToModify={eventToModify}
         cancelUpdate={this.cancelUpdate.bind(this)}
+        updateEvent={this.updateEvent.bind(this)}
 
       />
     );

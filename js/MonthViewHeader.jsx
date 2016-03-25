@@ -23,6 +23,7 @@ var NextMonthLink = require('./NextMonthLink.jsx');
                         datePickerDate={datePickerDate}
                         eventToModify={eventToModify}
                         cancelUpdate={this.props.cancelUpdate}
+                        updateEvent={this.props.updateEvent}
                     />
                     <table className="month-view-header">
         				<tbody>
