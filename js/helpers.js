@@ -1,4 +1,9 @@
 var helpers = {
+
+  isInteger: function(v) {
+    return v.match(/^\d+$/);
+  },
+
 	// Returns true if year is a leap year; otherwise false
   isLeapYear : function(utc) {
       var y = utc ? utc.getUTCFullYear() : utc.getFullYear();

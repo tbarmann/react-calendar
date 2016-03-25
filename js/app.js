@@ -66,7 +66,7 @@ class App extends React.Component {
     const entry = this.popHistory();
     // reverse it
     const action = entry.action;
-    // debugger;
+    console.log(entry);
     switch (action) {
       case 'add':
         this.removeEvent(entry.event.id, saveToHistory);
