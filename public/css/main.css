@@ -122,3 +122,26 @@ body {
 	display:inline-block;
 	margin-left:1px;
 }
+
+.month-mini-view, .mini-month-view td {
+	font-size:10px;
+	float:left;
+	margin-left:10px;
+
+}
+
+ .month-mini-view td.non-blank {
+	background-color:#EEEEEE;
+	text-align:center;
+}
+
+.month-mini-view td span.has-events {
+	background-color:green;
+	text-align:center;
+}
+
+.month-mini-header {
+	text-align:center;
+}
+
+

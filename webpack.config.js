@@ -1,11 +1,14 @@
+const path = require('path');
+
 module.exports = {
-    entry: "./js/app.js",
+    entry: path.join(__dirname,'js', 'app'),
     output: {
-        path: __dirname + "/public",
-        filename: "bundle.js"
+        path: path.join(__dirname,'public'),
+        filename: 'bundle.js',
+        publicPath: '/'
     },
     devServer: {
-        contentBase: "./public",
+        contentBase: './public',
         colors: true,
         historyApiFallback: true,
         inline: true,
@@ -13,11 +16,12 @@ module.exports = {
     },
     resolve: {
         extensions: ['', '.js', '.jsx'],
+        root: path.join(__dirname,'js')
     },
     module: {
         loaders: [
             { test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/, query: {presets:["react","es2015"]} },
             { test: /\.css$/, loader: "style!css" }
         ]
-    }
+    },
 };
