@@ -23,17 +23,6 @@ var EditEventForm =  React.createClass({
 		eventToModify.title = event.target.value;
     	this.setState({eventToModify:eventToModify});
   	},
-	// createEvent: function (e) {
-	// 	e.preventDefault();
-	// 	var thisEvent = this.serializeFormElements(this.refs.createForm);
-	// 	thisEvent.id = Date.now();
-	// 	this.props.addEvent(thisEvent);
-	// 	this.refs.createForm.reset();
-	// 	var redirectTo = "/monthView/" + thisEvent.y + "/" + thisEvent.m;
-	// 	if (window.location.pathname !== redirectTo) {
-	// 		window.location.pathname = redirectTo;
-	// 	}
-	// },
 
 	createOrUpdateEvent: function(e) {
 		e.preventDefault();
@@ -41,7 +30,6 @@ var EditEventForm =  React.createClass({
 		e.target.reset();
 		var actionType = thisEvent.hasOwnProperty('id') ? "update" : "create";
 		if (actionType === "update") {
-			console.log(thisEvent.id);
 			this.props.updateEvent(thisEvent);
 		}
 		else {

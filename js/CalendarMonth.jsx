@@ -1,15 +1,14 @@
-var React = require('react');
-var CellDate = require('./CellDate.jsx');
-var ListEvents = require('./ListEvents.jsx');
-var DaysOfWeek = require('./DaysOfWeek.jsx');
-var MonthViewHeader = require('./MonthViewHeader.jsx');
-var helpers = require('./helpers.js');
-var _ = require('underscore');
+const React = require('react');
+const CellDate = require('./CellDate.jsx');
+const ListEvents = require('./ListEvents.jsx');
+const DaysOfWeek = require('./DaysOfWeek.jsx');
+const MonthViewHeader = require('./MonthViewHeader.jsx');
+const helpers = require('./helpers.js');
+const _ = require('underscore');
 const Rebase = require('re-base');
 const base = Rebase.createClass('https://react-calendar.firebaseio.com/');
 const $ = require('jquery');
-
-
+const Notify = require('notify');
 
 const CalendarMonth = React.createClass({
 
@@ -20,6 +19,7 @@ const CalendarMonth = React.createClass({
           history: {},
           datePickerDate: {},
           eventToModify: {},
+          flash: {}
         };
       },
 
@@ -31,6 +31,16 @@ const CalendarMonth = React.createClass({
           context: this,
           state: 'history' });
         this.loadEvents();
+      },
+
+      setFlash(message, type="info") {
+        const flash = {message,type};
+        this.setState({flash});
+      },
+
+      clearFlash() {
+        const flash = {message:"",type:""};
+        this.setState({flash});
       },
 
       loadEvents() {
@@ -74,7 +84,6 @@ const CalendarMonth = React.createClass({
         const entry = this.popHistory();
         // reverse it
         const action = entry.action;
-        console.log(entry);
         switch (action) {
           case 'add':
             this.removeEvent(entry.event.id, saveToHistory);
@@ -99,6 +108,7 @@ const CalendarMonth = React.createClass({
           then() {
             if (saveToHistory === true) {
               self.pushHistory('delete', event);
+              self.setFlash(`Event successfully removed: ${event.title}`);
             }
           },
         });
@@ -123,6 +133,7 @@ const CalendarMonth = React.createClass({
               self.pushHistory('update',entry);
             }
             self.cancelUpdate();
+            self.setFlash(`Event successfully modified: ${updatedEvent.title}`);
           }
         });
       },
@@ -138,6 +149,7 @@ const CalendarMonth = React.createClass({
           then() {
             if (saveToHistory === true) {
               self.pushHistory('add', event);
+              self.setFlash(`Event successfully added: ${event.title}`);
             }
           },
         });
@@ -146,7 +158,7 @@ const CalendarMonth = React.createClass({
       render: function() {
 
         const { params, setDatePicker, modifyEvent } = this.props;
-        const { events, history, eventToModify, datePickerDate } = this.state;
+        const { events, history, eventToModify, datePickerDate, flash } = this.state;
 
         const today = new Date();
         const thisMonth = today.getMonth() + 1; // getMonth() returns 0 to 11
@@ -159,6 +171,11 @@ const CalendarMonth = React.createClass({
 
         return (
           <div className="month-view">
+            <Notify
+              flash={this.state.flash}
+              setFlash={this.setFlash}
+              clearFlash={this.clearFlash}
+            />
           	<MonthViewHeader
               undo={this.undo}
               historySize={historySize}

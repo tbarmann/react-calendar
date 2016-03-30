@@ -150,4 +150,22 @@ body {
 	text-align:center;
 }
 
+.notify {
+    min-height: 20px;
+    width: 87%;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    position: absolute;
+    opacity: 0.97;
+    text-align:center;
+}
 
+.hide {
+	display:none;
+}
+
+.notify.info {
+	background-color: lightblue;
+}
