@@ -8,7 +8,7 @@ const _ = require('underscore');
 const Rebase = require('re-base');
 const base = Rebase.createClass('https://react-calendar.firebaseio.com/');
 const $ = require('jquery');
-const Notify = require('notify');
+const Flash = require('flash');
 
 const CalendarMonth = React.createClass({
 
@@ -170,7 +170,7 @@ const CalendarMonth = React.createClass({
 
         return (
           <div className="month-view">
-            <Notify
+            <Flash
               flash={this.state.flash}
               setFlash={this.setFlash}
               clearFlash={this.clearFlash}
