@@ -1,14 +1,6 @@
 const React = require('react');
 const Notify = React.createClass({
 
-  // getInitialState() {
-
-  // // componentWillReceiveProps(nextProps) {
-  // //   console.log(nextProps.props);
-  // //   if (nextProps.flash.message) {
-  // //     this.setState({message:nextProps.flash.message,type:nextProps.flash.type});
-  // //   }
-  // // },
 
   handleClick() {
     this.props.clearFlash();

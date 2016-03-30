@@ -21,7 +21,11 @@ body {
 }
 
 .month-view-header {
-	margin-bottom:10px;
+	margin-bottom:20px;
+}
+
+.edit-event-container {
+	margin-bottom:20px;
 }
 
 .month-view .month-name {
@@ -132,7 +136,7 @@ body {
 }
 
 .month-mini-view {
-	background-color: #FAE9E3;
+	background-color: #lightblue;
 
 }
 

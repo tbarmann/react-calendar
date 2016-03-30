@@ -12,10 +12,10 @@ var TimePicker = require('./TimePicker.jsx');
 
       return(
         <span className="date-picker">
-          <MonthPicker datePickerDate={datePickerDate} />
-          <DayPicker datePickerDate={datePickerDate}/>
-          <YearPicker datePickerDate={datePickerDate}/>
-          <TimePicker datePickerDate={datePickerDate}/>
+          <MonthPicker datePickerDate={datePickerDate} />&nbsp;
+          <DayPicker datePickerDate={datePickerDate}/> &nbsp;
+          <YearPicker datePickerDate={datePickerDate}/> &nbsp;
+          <TimePicker datePickerDate={datePickerDate}/> &nbsp;
         </span>
         );
 

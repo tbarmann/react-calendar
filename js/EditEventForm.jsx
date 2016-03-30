@@ -81,23 +81,27 @@ var EditEventForm =  React.createClass({
 		if (this.state.formType === 'create') {
 			// create form
 			return (
-				<form className="event-edit" ref="createForm" onSubmit={this.createOrUpdateEvent}>
-					<DatePicker datePickerDate={datePickerDate}/>&nbsp;
-					<input name="title" type="text" ref="title" placeholder="Title" />&nbsp;
-					<button name="submit" value="addItem" type="submit">+ Add Item </button>&nbsp;
-					<button name="undo" value="undo" type="submit" disabled={undoStatus} onClick={handleUndo}>Undo ({historySize})</button>
-				</form>
+				<div className="edit-event-container">
+					<form className="event-edit" ref="createForm" onSubmit={this.createOrUpdateEvent}>
+						<DatePicker datePickerDate={datePickerDate}/>&nbsp;
+						<input name="title" type="text" ref="title" placeholder="Title" />&nbsp;
+						<button name="submit" value="addItem" type="submit">+ Add Item </button>&nbsp;
+						<button name="undo" value="undo" type="submit" disabled={undoStatus} onClick={handleUndo}>Undo ({historySize})</button>
+					</form>
+				</div>
 			)
 		}
 		// update form
 		return (
-			<form className="event-edit" ref="updateForm" onSubmit={this.createOrUpdateEvent}>
-				<DatePicker datePickerDate={datePickerDate}/>&nbsp;
-				<input name="title" type="text" ref="title" value={this.state.eventToModify.title} placeholder="Title" onChange={this.handleTitleChange}/>&nbsp;
-				<input name="id" type="hidden" ref="id" value={this.state.eventToModify.id} />
-				<button name="submit" value="addItem" type="submit">Update Item </button>&nbsp;
-				<button name="cancel" value="cancel" type="submit" onClick={handleCancel}>Cancel</button>
-			</form>
+			<div className="edit-event-container">
+				<form className="event-edit" ref="updateForm" onSubmit={this.createOrUpdateEvent}>
+					<DatePicker datePickerDate={datePickerDate}/>&nbsp;
+					<input name="title" type="text" ref="title" value={this.state.eventToModify.title} placeholder="Title" onChange={this.handleTitleChange}/>&nbsp;
+					<input name="id" type="hidden" ref="id" value={this.state.eventToModify.id} />
+					<button name="submit" value="addItem" type="submit">Update Item </button>&nbsp;
+					<button name="cancel" value="cancel" type="submit" onClick={handleCancel}>Cancel</button>
+				</form>
+			</div>
 		)
 	}
 

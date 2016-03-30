@@ -102,7 +102,6 @@ const CalendarMonth = React.createClass({
       removeEvent(id, saveToHistory = true) {
         const self = this;
         const event = _.extend({}, this.state.events[id]);
-        // debugger;
         base.post(`events/${id}`, {
           data: null,
           then() {
