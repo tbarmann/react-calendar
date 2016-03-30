@@ -173,3 +173,8 @@ body {
 .notify.info {
 	background-color: lightblue;
 }
+
+.notify.warn {
+	background-color: red;
+
+}
