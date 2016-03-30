@@ -126,7 +126,13 @@ body {
 .month-mini-view, .mini-month-view td {
 	font-size:10px;
 	float:left;
-	margin-left:10px;
+	margin:0 0 10px 10px;
+	min-height:120px;
+
+}
+
+.month-mini-view {
+	background-color: #FAE9E3;
 
 }
 

@@ -24,21 +24,20 @@ const CalendarMonth = React.createClass({
       },
 
       componentDidMount() {
+        base.syncState('events', {
+          context: this,
+          state: 'events' });
+        base.syncState('history', {
+          context: this,
+          state: 'history' });
         this.loadEvents();
-
-
       },
 
       loadEvents() {
         $.getJSON('/data/events.js', (data) => {
-          const newData = _.extend(this.state.events, data);
-          this.setState({ events: newData}) ;
-          base.syncState('events', {
-            context: this,
-            state: 'events' });
-          base.syncState('history', {
-            context: this,
-            state: 'history' });
+          _.each(data, (item) => {
+            base.post(`events/${item.id}`, {data: item});
+          });
         });
       },
 

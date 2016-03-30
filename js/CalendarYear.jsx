@@ -13,10 +13,7 @@ const CalendarYear = React.createClass({
 
      getInitialState() {
         return {
-          events: {},
-          history: {},
-          datePickerDate: {},
-          eventToModify: {},
+          events: {}
         };
       },
 
