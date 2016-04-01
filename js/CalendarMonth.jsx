@@ -130,9 +130,9 @@ const CalendarMonth = React.createClass({
           then() {
             if (saveToHistory === true) {
               self.pushHistory('update',entry);
+              self.setFlash(`Event successfully modified: ${updatedEvent.title}`);
             }
             self.cancelUpdate();
-            self.setFlash(`Event successfully modified: ${updatedEvent.title}`);
           }
         });
       },
